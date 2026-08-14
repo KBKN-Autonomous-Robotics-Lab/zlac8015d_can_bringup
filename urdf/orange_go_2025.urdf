@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot name="orange_go_2025">
+
+  <link name="base_link"/>
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.064" rpy="0 0 0"/> </joint>
+
+  <link name="left_wheel">
+    </link>
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0 0.145 0" rpy="-1.57079632679 0 0"/> 
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="right_wheel"/>
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0 -0.145 0" rpy="-1.57079632679 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <ros2_control name="Zlac8015dSystem" type="system">
+    <hardware>
+      <plugin>zlac8015d_hardware/Zlac8015dSystemHardware</plugin>
+    </hardware>
+    <joint name="left_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="right_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+
+</robot>

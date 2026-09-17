@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot name="orange_go_2025">
+
+  <link name="base_link"/>
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.064" rpy="0 0 0"/> </joint>
+
+  <link name="left_wheel">
+    </link>
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0 0.138 0" rpy="-1.57079632679 0 0"/> 
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="right_wheel"/>
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0 -0.138 0" rpy="-1.57079632679 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <ros2_control name="Zlac8015dSystem" type="system">
+    <hardware>
+      <plugin>zlac8015d_hardware/Zlac8015dSystemHardware</plugin>
+
+      <!-- CANopen -->
+      <param name="can_interface">can0</param>
+      <param name="node_id">1</param>
+
+      <!--
+        Keep "velocity" until b0 identification is finished.
+        Then set this to "ladrc_torque" and replace ladrc_b0_left/right
+        with the values reported by analyze_b0.py.
+      -->
+      <param name="control_mode">ladrc_torque</param>
+
+      <!-- LADRC: omega_dot = f + b0 * I -->
+      <param name="ladrc_b0_left">20.0</param>
+      <param name="ladrc_b0_right">20.0</param>
+      <param name="ladrc_wc">5.0</param>
+      <param name="ladrc_wo">20.0</param>
+
+      <!-- Current-command safety constraints -->
+      <param name="current_limit_a">1.8</param>
+      <param name="current_rate_limit_a_per_s">20.0</param>
+      <param name="feedback_timeout_ms">30.0</param>
+    </hardware>
+    <joint name="left_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="right_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+
+</robot>

@@ -48,7 +48,7 @@
       <param name="ladrc_wo">20.0</param>
 
       <!-- Current-command safety constraints -->
-      <param name="current_limit_a">1.4</param>
+      <param name="current_limit_a">4.0</param>
       <param name="current_rate_limit_a_per_s">20.0</param>
       <param name="feedback_timeout_ms">30.0</param>
     </hardware>

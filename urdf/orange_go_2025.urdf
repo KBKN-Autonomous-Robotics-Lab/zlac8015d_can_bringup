@@ -42,13 +42,13 @@
       <param name="control_mode">ladrc_torque</param>
 
       <!-- LADRC: omega_dot = f + b0 * I -->
-      <param name="ladrc_b0_left">20.0</param>
-      <param name="ladrc_b0_right">20.0</param>
+      <param name="ladrc_b0_left">18.0</param>
+      <param name="ladrc_b0_right">18.0</param>
       <param name="ladrc_wc">5.0</param>
       <param name="ladrc_wo">20.0</param>
 
       <!-- Current-command safety constraints -->
-      <param name="current_limit_a">4.0</param>
+      <param name="current_limit_a">8.0</param>
       <param name="current_rate_limit_a_per_s">20.0</param>
       <param name="feedback_timeout_ms">30.0</param>
     </hardware>
